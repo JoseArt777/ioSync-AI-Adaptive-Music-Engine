@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Recommendation System</title>
+<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+{% endblock %}
+
+{% block body %}
+
+<header>
+    <div class="header-box">
+        <div class="logo">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo">
+            <h3><a href="/">Movie Recommendation System</a></h3>
+        </div>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="filter">
+            <h2 class="separated">Here's a list of {{movieRecAmount}} movies that share similar {{movieFilter}} with {{movieRefName}}</h2>
+    </div>
+</div>
+
+<div class="program">
+    {% for movie in recommendation_list %}
+    <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="{{poster_list[loop.index0]}}">
+            <img class="shadow" src="{{poster_list[loop.index0]}}" alt="Movie poster" width="250" height="375">
+          </a>
+          <div class="desc "><h4>{{movie}}</h4></div>
+        </div>
+    </div>
+    {% endfor %}      
+</div>
+
+<div class="center algorithm">
+    <div class="separated">
+        <p class="separated">Do you want to know how the program works? Click the button below to find out</p>
+        <a href="algorithm">
+            <button class="recommend shadow float-on-hover lighter" >Learn more about the project</button>
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}

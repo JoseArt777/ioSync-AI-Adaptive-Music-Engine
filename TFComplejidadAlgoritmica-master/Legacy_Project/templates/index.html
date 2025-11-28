@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title id="title">Recommendation System</title>
+<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+{% endblock %}
+
+{% block body %}
+
+<header>
+    <div class="header-box">
+        <div class="logo">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo">
+            <h3><a href="/">Movie Recommendation System</a></h3>
+        </div>
+    </div>
+</header>
+
+<div class="hero">
+    <section class="left">
+        <h1 class="separated">Movie Recommendation System</h1>
+        <p class="separated lighter">Enter a movie you like and the site will analyze the dataset to provide recommendations for what to watch next</p>
+        <div class="separated">
+            <button type="button" class="recommend shadow float-on-hover lighter" onclick="window.open('https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata','_blank')">See the dataset</button>
+        </div>
+    </section>
+
+    <section class="right">
+        <img class="separated shadow" src="{{url_for('static', filename='images/5250.jpg')}}" alt="Hero illustration" href="http://www.freepik.com"/>
+    </section>
+</div>
+
+<div class="program">
+
+    <form method="post">
+        <!-- 1.1. Type the name of a movie to take as a reference -->
+        <div class="filter new_section">
+            <section class="left">
+                <h2 class="separated">1. Type a movie to get started</h2>
+                <p class="separated lighter">Type on the searchbar the name of a movie you like, the site will take that information as a starting point of reference</p>
+            </section>
+
+            <section class="right autocomplete">
+                <input class="separated searchbar" type="text" name="movieref" id="searchbar" placeholder=" Type here" required autocomplete="off">
+                <script>
+                    autocomplete();
+                </script>
+            </section>
+        </div>
+
+
+
+        <!-- 1.2. Filter movies by-->
+        <div class="filter new_section">
+            <section class="left">
+                <h2 class="separated">2. Recommend movies with similar...</h2>
+                <p class="separated lighter">Select a filter of your interest</p>
+            </section>
+
+            <section class="right">
+                <div class="checkbox shadow separated">
+                    <input type="checkbox" onclick="onlyOne(this)" id="checkbox_1" name="check" value="studio">
+                    <label for="checkbox_1">Studio</label>
+
+                    <input type="checkbox" onclick="onlyOne(this)" id="checkbox_2" name="check" value="genre">
+                    <label for="checkbox_2">Genre</label>
+
+                    <input type="checkbox" onclick="onlyOne(this)" id="checkbox_3" name="check" value="overview">
+                    <label for="checkbox_3">Overview</label>
+                </div>
+            </section>
+        </div>
+
+        <!-- 1.3. Adjust the number of recommendations-->
+        <div class="filter new_section">
+            <section class="left">
+                <h2 class="separated">3. Adjust the number of recommendations</h2>
+                <p class="separated lighter">Type on the searchbar a number to get between 1 and 15 recommendations</p>
+            </section>
+
+            <section class="right">
+                <input class="amount separated" type="number" name="recamount" min="1" max="15" placeholder="1" required>
+            </section>
+        </div>
+
+        <!-- 1.4. Submit-->
+        <div class="center">
+            <div class="separated">
+                <button type="submit" class="recommend shadow float-on-hover lighter">Recommend</button>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+{% endblock %}

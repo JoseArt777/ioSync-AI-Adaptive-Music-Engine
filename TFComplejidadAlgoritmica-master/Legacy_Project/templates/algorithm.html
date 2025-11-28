@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Recommendation System</title>
+<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+{% endblock %}
+
+{% block body %}
+
+<header>
+    <div class="header-box">
+        <div class="logo">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo">
+            <h3><a href="/">Movie Recommendation System</a></h3>
+        </div>
+    </div>
+</header>
+
+<div class="hero">
+    <h1 class="separated">Learn more about the project</h1>
+</div>
+
+
+<div class="about ">
+    <div class="justify">
+        <h2 class="center">What is the program about?</h2>
+        <p class="separated lighter">The proposal consists on simulating a movie recommendation platform, in which users can filter movies based on parameters.</p>
+    </div>
+</div>
+
+<div class="about">
+    <div class="justify">
+        <h2 class="center">How does the algorithm work?</h2>
+        <p class=" separated lighter">
+           The information provided by <a href="https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata">the dataset</a> is stored in an undirected graph data structure, where nodes are represented by movie IDs, and edges correspond to the relationships between movies.
+           The edges' weights are determined by user-selected parameters (Such as genre, studio and overview), an idea that emerged from researching about <a href="http://users.ics.forth.gr/~potamias/mlnia/paper_6.pdf">content-based filtering</a>. This technique is employed to classify content as relevant or not relevant to users, providing personalized recommendations.
+        </p>
+    </div>
+</div>
+
+<div class="about">
+    <div class="justify">
+    <h2 class="center">Visualizing the Graph</h2>
+    <p class="separated lighter">Below you can find a visual representation of the graph associated with the input you provided in the previous steps, the ID of the movie you selected is located at the middle, and the recommendations shown are highlighted by a yellow border.</p>
+    <div class="center">
+        <img class="separated graph" src="{{url_for('static', filename='images/graph.png')}}" alt="graph">
+    </div>
+    </div>
+</div>
+
+{% endblock %}
