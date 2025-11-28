@@ -99,15 +99,17 @@ if 'next_song_switch_time' not in st.session_state:
 # --- Inicialización de Lógica (Modo Standalone) ---
 @st.cache_resource
 def get_logic_engine():
-    real_data_path = os.path.join("data", "dataset.csv")
-    mock_data_path = os.path.join("data", "spotify_mock.csv")
+    # Resolver rutas absolutas basadas en la ubicación de este archivo (frontend/app.py)
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # BioSyncAI/
+    real_data_path = os.path.join(base_dir, "data", "dataset.csv")
+    mock_data_path = os.path.join(base_dir, "data", "spotify_mock.csv")
     
     if os.path.exists(real_data_path):
         return BioSyncLogic(music_db_path=real_data_path)
     
     if not os.path.exists(mock_data_path):
         df = generate_mock_spotify_data()
-        os.makedirs("data", exist_ok=True)
+        os.makedirs(os.path.join(base_dir, "data"), exist_ok=True)
         df.to_csv(mock_data_path, index=False)
     return BioSyncLogic(music_db_path=mock_data_path)
 

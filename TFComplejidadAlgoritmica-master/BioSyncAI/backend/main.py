@@ -17,9 +17,15 @@ real_data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data"
 mock_data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "spotify_mock.csv")
 
 if os.path.exists(real_data_path):
+    with open("debug_log.txt", "w") as f:
+        f.write(f"DEBUG: Found real dataset at {real_data_path}\n")
+        f.write(f"DEBUG: File size: {os.path.getsize(real_data_path)}\n")
     print(f"Loading real dataset from {real_data_path}")
     logic_engine = BioSyncLogic(music_db_path=real_data_path)
 else:
+    with open("debug_log.txt", "w") as f:
+        f.write(f"DEBUG: Real dataset NOT found at {real_data_path}\n")
+        f.write(f"DEBUG: Current working dir: {os.getcwd()}\n")
     print("Real dataset not found. Generating mock data...")
     if not os.path.exists(mock_data_path):
         df = generate_mock_spotify_data()
